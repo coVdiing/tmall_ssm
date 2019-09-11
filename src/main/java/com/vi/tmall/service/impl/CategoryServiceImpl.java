@@ -23,4 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.getTotal();
     }
 
+    public void add(Category category) {
+        categoryMapper.add(category);
+    }
 }

@@ -6,9 +6,14 @@
 <mapper namespace="com.vi.tmall.mapper.CategoryMapper">
     <select id="list" resultType="Category">
         select * from category order by id desc
+        <if test="start!=null and count != null" >
+            limit #{start},#{count}
+        </if>
     </select>
 
-    <insert id="add" parameterType="com.vi.tmall.pojo.Category">
-        insert into category(name) values(#{name})
-    </insert>
+    <select id="getTotal" resultType="int">
+        select count(*) from category
+    </select>
+
+
 </mapper>

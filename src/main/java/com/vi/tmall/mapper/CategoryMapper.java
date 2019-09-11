@@ -1,12 +1,12 @@
 package com.vi.tmall.mapper;
 
 import com.vi.tmall.pojo.Category;
+import com.vi.tmall.util.Page;
 
 
 import java.util.List;
 
 public interface CategoryMapper {
-    List<Category> list();
-
-    void add(Category category);
+    List<Category> list(Page page);
+    int getTotal();
 }

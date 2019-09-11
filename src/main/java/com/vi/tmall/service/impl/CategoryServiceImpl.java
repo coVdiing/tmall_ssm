@@ -3,6 +3,7 @@ package com.vi.tmall.service.impl;
 import com.vi.tmall.mapper.CategoryMapper;
 import com.vi.tmall.pojo.Category;
 import com.vi.tmall.service.CategoryService;
+import com.vi.tmall.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +14,13 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryMapper categoryMapper;
 
     @Override
-    public List<Category> list() {
-
-        return categoryMapper.list();
+    public List<Category> list(Page page) {
+        return categoryMapper.list(page);
     }
 
-    public void add(Category category) {
-        categoryMapper.add(category);
+    public int getTotal() {
+
+        return categoryMapper.getTotal();
     }
+
 }

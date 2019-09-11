@@ -24,7 +24,7 @@ public class TestMall {
         for (int i = 5; i < 11; i++) {
             Category c = new Category();
             c.setName("测试分类" + i);
-            cm.add(c);
+
         }
     }
 }

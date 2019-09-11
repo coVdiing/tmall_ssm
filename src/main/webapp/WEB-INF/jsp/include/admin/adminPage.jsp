@@ -14,19 +14,19 @@ $(function(){
 
 <nav>
   <ul class="pagination">
-    <li <c:if test="${!page.hasPreviouse}">class="disabled"</c:if>>
+    <li <c:if test="${!page.hasPrevious}">class="disabled"</c:if>>
       <a  href="?start=0${page.param}" aria-label="Previous" >
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
 
-    <li <c:if test="${!page.hasPreviouse}">class="disabled"</c:if>>
+    <li <c:if test="${!page.hasPrevious}">class="disabled"</c:if>>
       <a  href="?start=${page.start-page.count}${page.param}" aria-label="Previous" >
         <span aria-hidden="true">&lsaquo;</span>
       </a>
     </li>    
 
-    <c:forEach begin="0" end="${page.totalPage-1}" varStatus="status">
+    <c:forEach begin="0" end="${page.totalPage}" varStatus="status">
     
     	
 		    <li <c:if test="${status.index*page.count==page.start}">class="disabled"</c:if>>

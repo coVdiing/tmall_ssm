@@ -9,4 +9,5 @@ import java.util.List;
 public interface CategoryMapper {
     List<Category> list(Page page);
     int getTotal();
+    void add(Category category);
 }

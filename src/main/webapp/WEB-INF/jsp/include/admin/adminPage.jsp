@@ -16,7 +16,7 @@ $(function(){
   <ul class="pagination">
     <li <c:if test="${!page.hasPrevious}">class="disabled"</c:if>>
       <a  href="?start=0${page.param}" aria-label="Previous" >
-        <span aria-hidden="true">&laquo;</span>
+        <span aria-hidden="true">首页</span>
       </a>
     </li>
 
@@ -45,7 +45,7 @@ $(function(){
     </li>
     <li <c:if test="${!page.hasNext}">class="disabled"</c:if>>
       <a href="?start=${page.last}${page.param}" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
+        <span aria-hidden="true">末页</span>
       </a>
     </li>
   </ul>

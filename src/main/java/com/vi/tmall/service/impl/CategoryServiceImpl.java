@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
@@ -18,12 +19,11 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.list(page);
     }
 
-    public int getTotal() {
-
-        return categoryMapper.getTotal();
-    }
+    public int getTotal() { return categoryMapper.getTotal(); }
 
     public void add(Category category) {
         categoryMapper.add(category);
     }
+
+    public void delete(int id) { categoryMapper.delete(id);}
 }

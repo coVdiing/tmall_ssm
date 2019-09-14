@@ -48,6 +48,16 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="typeAliasesPackage" value="com.vi.tmall.pojo"/>
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <!-- 支持分页插件 PageHelper-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value></value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
     <!--Mybatis的Mapper文件识别-->

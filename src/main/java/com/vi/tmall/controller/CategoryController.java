@@ -1,5 +1,8 @@
 package com.vi.tmall.controller;
 
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.vi.tmall.pojo.Category;
 import com.vi.tmall.service.impl.CategoryServiceImpl;
 import com.vi.tmall.util.ImageUtil;
@@ -25,11 +28,14 @@ public class CategoryController {
     CategoryServiceImpl categoryService;
 
     @RequestMapping("admin_category_list")
-    public String list(Model model,Page page){
-        System.out.println("进入控制器list!!");
-        int total = categoryService.getTotal();
+    public String list(Model model, Page page){
+        //通过分页插件指定分页参数
+        PageHelper.offsetPage(page.getStart(),page.getCount());
+        //调用list() 获取对应分页的数据
+        List<Category> cs = categoryService.list();
+        //通过PageInfo获取总数
+        int total = (int)new PageInfo<>(cs).getTotal();
         page.setTotal(total);
-        List<Category> cs = categoryService.list(page);
         model.addAttribute("cs",cs);
         model.addAttribute("page",page);
         return "admin/listCategory";

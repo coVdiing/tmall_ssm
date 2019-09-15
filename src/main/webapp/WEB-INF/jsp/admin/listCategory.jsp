@@ -19,7 +19,6 @@
 
 <title>分页管理</title>
 <div class=""workingArea">
-    <h1 class="label label-info">分页管理</h1>
     <br>
     <br>
 

@@ -1,7 +1,7 @@
 package com.vi.tmall.util;
 
 public class Page {
-    //开始页数
+    //当前记录数
     private int start;
     //每页显示个数
     private int count;
@@ -38,17 +38,18 @@ public class Page {
     public Page() {
         count = defaultCount;
     }
+    public Page(int start,int count) {
+        this();
+        this.start = start;
+        this.count = count;
+    }
     public String getParam() {
         return param;
     }
     public void setParam(String param) {
         this.param = param;
     }
-    public Page(int start,int count) {
-        this();
-        this.start = start;
-        this.count = count;
-    }
+
     //是否有上一页
     public boolean isHasPrevious() {
         return !(start == 0);

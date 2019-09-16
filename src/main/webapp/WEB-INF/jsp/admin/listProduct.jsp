@@ -18,11 +18,12 @@
         });
     });
 </script>
+<title>产品列表</title>
 <div class="workingArea">
     <ol class="breadcrumb">
         <li><a href="admin_category_list">全部分类</a></li>
         <li>${category.name}</li>
-        <li class="active">产品管理</li>
+        <li class="active">产品列表</li>
     </ol>
     <!-- 展示数据 -->
     <div class="listDataTableDiv">

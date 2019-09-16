@@ -39,6 +39,8 @@ public class ProductServiceImpl implements ProductService {
         //通过Category id来查找
         ProductExample example = new ProductExample();
         example.createCriteria().andCidEqualTo(cid);
+        //通过id 降序排列
+        example.setOrderByClause("id desc");
         return productMapper.selectByExample(example);
     }
 }

@@ -44,7 +44,12 @@
             <c:forEach items="${productList}" var="product">
                 <tr>
                     <td>${product.id}</td>
-                    <td></td>
+                    <td>
+                        <c:if test="${!empty product.firstProductImage}">
+                            <img width="40px" src="img/productSingle_small/${product.firstProductImage.id}.jpg">
+                        </c:if>
+
+                    </td>
                     <td>${product.name}</td>
                     <td>${product.subTitle}</td>
                     <td>${product.originalPrice}</td>
@@ -99,5 +104,5 @@
 <div class="pageDiv">
     <%@ include file="../include/admin/adminPage.jsp" %>
 </div>
-
+<img width="40px" src="img/productSingle_small/17.jpg">
 <%@include file="../include/admin/adminFooter.jsp"%>

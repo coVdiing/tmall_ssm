@@ -9,6 +9,9 @@ public class PropertyValue {
 
     private String value;
 
+    //添加一个Property对象,这个是非数据库字段
+    private Property property;
+
     public Integer getId() {
         return id;
     }
@@ -39,5 +42,13 @@ public class PropertyValue {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
     }
 }

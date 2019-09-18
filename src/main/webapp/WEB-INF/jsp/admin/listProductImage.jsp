@@ -100,7 +100,7 @@
                             <form method="post" class="addFormDetail" action="admin_productImage_add" enctype="multipart/form-data">
                                 <table class="addTable">
                                     <tr>
-                                        <td>请选择本地图片 宽度为佳</td>
+                                        <td>请选择本地图片 790宽度为佳</td>
                                     </tr>
                                     <tr>
                                         <td align="center"><input id="filePathDetail" type="file" name="image"></td>

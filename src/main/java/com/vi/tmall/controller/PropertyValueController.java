@@ -20,6 +20,12 @@ public class PropertyValueController {
     @Autowired
     ProductService productService;
 
+    /**
+     * 带着属性值跳转到属性编辑页面
+     * @param pid
+     * @param model
+     * @return
+     */
     @RequestMapping("admin_propertyValue_edit")
     public String edit(int pid, Model model) {
         Product product = productService.get(pid);

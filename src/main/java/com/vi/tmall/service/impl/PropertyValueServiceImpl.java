@@ -32,10 +32,20 @@ public class PropertyValueServiceImpl implements PropertyValueService {
         }
     }
 
+    /**
+     * 更新
+     * @param propertyValue
+     */
     public void update(PropertyValue propertyValue) {
         propertyValueMapper.updateByPrimaryKey(propertyValue);
     }
 
+    /**
+     * 单个查找
+     * @param ptid
+     * @param pid
+     * @return
+     */
     public PropertyValue get(int ptid,int pid) {
         PropertyValueExample example = new PropertyValueExample();
         example.createCriteria().andIdEqualTo(ptid).andPidEqualTo(pid);
@@ -46,12 +56,19 @@ public class PropertyValueServiceImpl implements PropertyValueService {
         return null;
     }
 
+    /**
+     * 批量查找
+     * @param pid
+     * @return
+     */
     public List<PropertyValue> list(int pid) {
         PropertyValueExample example = new PropertyValueExample();
         example.createCriteria().andPidEqualTo(pid);
+        //从数据库中查出propertyValue,此时拥有pid,ptid,value(可能为空)
         List<PropertyValue> result = propertyValueMapper.selectByExample(example);
         for(PropertyValue propertyValue : result) {
-            Property property = propertyService.get(propertyValue.getPid());
+            Property property = propertyService.get(propertyValue.getPtid());
+            //给对应的propertyValue赋上我们后来添加的非数据库字段
             propertyValue.setProperty(property);
         }
         return result;

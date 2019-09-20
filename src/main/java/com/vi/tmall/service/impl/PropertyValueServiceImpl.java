@@ -5,72 +5,77 @@ import com.vi.tmall.pojo.Product;
 import com.vi.tmall.pojo.Property;
 import com.vi.tmall.pojo.PropertyValue;
 import com.vi.tmall.pojo.PropertyValueExample;
+import com.vi.tmall.service.ProductService;
 import com.vi.tmall.service.PropertyService;
 import com.vi.tmall.service.PropertyValueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PropertyValueServiceImpl implements PropertyValueService {
     @Autowired
     PropertyValueMapper propertyValueMapper;
     @Autowired
     PropertyService propertyService;
+    @Autowired
+    ProductService productService;
 
-    public void init(Product product) {
-        //根据产品获取分类id，并查找出对应的全部属性
-        List<Property> list = propertyService.list(product.getCid());
-        //遍历属性对象，如果是空，给他赋值。完成初始化
-        for(Property property : list) {
-            PropertyValue propertyValue = get(property.getId(),product.getId());
-            if(propertyValue == null) {
-                propertyValue = new PropertyValue();
-                propertyValue.setId(property.getId());
-                propertyValue.setPtid(product.getId());
-                propertyValueMapper.insert(propertyValue);
+    /**
+     * 初始化的目的:初始化之后，数据库中的propertyValue会得到ptid,pid,id三列数据
+     * 本来propertyValue表是空的，通过这一步可以将对应的product的属性相关的propertyValue插入到表中
+     * @param p
+     */
+    @Override
+    public void init(Product p) {
+        //查出p的所有属性
+        List<Property> pts = propertyService.list(p.getCid());
+        //获取属性值，如果为空就新建一个,插入到数据库中
+        for (Property property : pts) {
+            PropertyValue pv = get(property.getId(), p.getId());
+            if (pv == null) {
+                pv = new PropertyValue();
+                pv.setPid(p.getId());
+                pv.setPtid(property.getId());
+                propertyValueMapper.insert(pv);
             }
         }
     }
 
-    /**
-     * 更新
-     * @param propertyValue
-     */
-    public void update(PropertyValue propertyValue) {
-        propertyValueMapper.updateByPrimaryKey(propertyValue);
+    @Override
+    public void update(PropertyValue pv) {
+        propertyValueMapper.updateByPrimaryKeySelective(pv);
     }
 
-    /**
-     * 单个查找
-     * @param ptid
-     * @param pid
-     * @return
-     */
-    public PropertyValue get(int ptid,int pid) {
+    @Override
+    public PropertyValue get(int ptid, int pid) {
         PropertyValueExample example = new PropertyValueExample();
-        example.createCriteria().andIdEqualTo(ptid).andPidEqualTo(pid);
-        List<PropertyValue> result = propertyValueMapper.selectByExample(example);
-        if(!result.isEmpty()) {
-            return result.get(0);
-        }
-        return null;
+        example.createCriteria().andPtidEqualTo(ptid).andPidEqualTo(pid);
+        List<PropertyValue> pvs = propertyValueMapper.selectByExample(example);
+        if (pvs.isEmpty())
+            return null;
+        PropertyValue pv = pvs.get(0);
+        pv.setProperty(propertyService.get(ptid));
+        return pv;
     }
 
     /**
-     * 批量查找
+     * 这一步的目的是将数据库propertyValue中的数据注入到对象，
+     * 在这个过程中还要将propertyValue对应的property对象设置上，这样在editPropertyValue.jsp页面
+     * 我们就可以通过el表达式来进行取值
      * @param pid
      * @return
      */
+    @Override
     public List<PropertyValue> list(int pid) {
         PropertyValueExample example = new PropertyValueExample();
         example.createCriteria().andPidEqualTo(pid);
-        //从数据库中查出propertyValue,此时拥有pid,ptid,value(可能为空)
-        List<PropertyValue> result = propertyValueMapper.selectByExample(example);
-        for(PropertyValue propertyValue : result) {
-            Property property = propertyService.get(propertyValue.getPtid());
-            //给对应的propertyValue赋上我们后来添加的非数据库字段
-            propertyValue.setProperty(property);
+        List<PropertyValue> pvs = propertyValueMapper.selectByExample(example);
+        for(PropertyValue pv : pvs) {
+            Property property = propertyService.get(pv.getPtid());
+            pv.setProperty(property);
         }
-        return result;
+        return pvs;
     }
 }

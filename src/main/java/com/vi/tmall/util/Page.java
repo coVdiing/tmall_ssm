@@ -62,10 +62,10 @@ public class Page {
     public int getTotalPage() {
         int totalPage;
         if(total%count == 0)
-            totalPage = total/count + 1;
+            totalPage = total/count - 1 ;
         else
             totalPage = total/count;
-        if(totalPage == 0)
+        if(totalPage <= 0)
             totalPage = 1;
         return totalPage;
     }

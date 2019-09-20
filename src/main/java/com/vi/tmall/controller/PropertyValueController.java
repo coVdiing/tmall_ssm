@@ -20,26 +20,23 @@ public class PropertyValueController {
     @Autowired
     ProductService productService;
 
-    /**
-     * 带着属性值跳转到属性编辑页面
-     * @param pid
-     * @param model
-     * @return
-     */
     @RequestMapping("admin_propertyValue_edit")
-    public String edit(int pid, Model model) {
-        Product product = productService.get(pid);
-        propertyValueService.init(product);
-        List<PropertyValue> result = propertyValueService.list(pid);
-        model.addAttribute("propertyValueList",result);
-        model.addAttribute("product",product);
+    public String edit(Model model,int pid) {
+        Product p = productService.get(pid);
+        //对p的属性进行初始化,完成这一步骤之后，propertyValue表中对应的数据不再是空
+        propertyValueService.init(p);
+        //取出propertyValue对象集合
+        List<PropertyValue> pvs = propertyValueService.list(p.getId());
+        //加入request域中
+        model.addAttribute("pvs",pvs);
+        model.addAttribute("p",p);
         return "admin/editPropertyValue";
     }
 
     @RequestMapping("admin_propertyValue_update")
     @ResponseBody
-    public String update(PropertyValue propertyValue) {
-        propertyValueService.update(propertyValue);
+    public String update(PropertyValue pv) {
+        propertyValueService.update(pv);
         return "success";
     }
 }

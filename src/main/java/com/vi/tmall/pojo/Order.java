@@ -1,5 +1,7 @@
 package com.vi.tmall.pojo;
 
+import com.vi.tmall.service.OrderService;
+
 import java.util.Date;
 import java.util.List;
 

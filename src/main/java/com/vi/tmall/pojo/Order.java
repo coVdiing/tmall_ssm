@@ -1,6 +1,7 @@
 package com.vi.tmall.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private Integer id;
@@ -28,6 +29,19 @@ public class Order {
     private Integer uid;
 
     private String status;
+
+    //如下是非数据库字段
+    //新增订单下的订单项集合
+    private List<OrderItem> orderItemList;
+
+    //该订单对应的用户
+    private User user;
+
+    //该订单的总计金额
+    private float total;
+
+    //该订单的总计数量
+    private int totalNumber;
 
     public Integer getId() {
         return id;
@@ -131,5 +145,65 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<OrderItem> getOrderItemList() {
+        return orderItemList;
+    }
+
+    public void setOrderItemList(List<OrderItem> orderItemList) {
+        this.orderItemList = orderItemList;
+    }
+
+    //用于把英文表达的Status信息转换为中文
+    public String getStatusDesc() {
+        String desc = "未知";
+        switch(status) {
+            case OrderService.waitPay:
+                desc="待付款";
+                break;
+            case OrderService.waitDelivery:
+                desc="待发货";
+                break;
+            case OrderService.waitConfirm:
+                desc="待收货";
+                break;
+            case OrderService.waitReview:
+                desc="待评价";
+                break;
+            case OrderService.finish:
+                desc="完成";
+                break;
+            case OrderService.delete:
+                desc="删除";
+                break;
+            default:
+                desc="未知";
+        }
+        return desc;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
+    public int getTotalNumber() {
+        return totalNumber;
+    }
+
+    public void setTotalNumber(int totalNumber) {
+        this.totalNumber = totalNumber;
     }
 }

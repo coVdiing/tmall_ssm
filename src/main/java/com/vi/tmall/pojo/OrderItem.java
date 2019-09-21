@@ -11,6 +11,9 @@ public class OrderItem {
 
     private Integer number;
 
+    //在自动创建的基础上增加了一个product属性。 因为在订单管理页面需要看到订单下面的订单项里的产品图片。
+    private Product product;
+
     public Integer getId() {
         return id;
     }
@@ -49,5 +52,13 @@ public class OrderItem {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

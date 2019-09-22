@@ -63,7 +63,7 @@ public class OrderItemServiceImpl implements OrderItemService {
         }
         order.setTotal(total);
         order.setTotalNumber(totalNumber);
-        order.setOrderItemList(ois);
+        order.setOrderItems(ois);
     }
 
     public void fill(List<Order> os) {

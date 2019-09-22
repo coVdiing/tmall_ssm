@@ -56,7 +56,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from order
+    from order_
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -67,15 +67,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from order
+    from order_
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
+    delete from order_
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.vi.tmall.pojo.Order" useGeneratedKeys="true">
-    insert into order (orderCode, address, post, 
+    insert into order_ (orderCode, address, post, 
       receiver, mobile, userMessage, 
       createDate, payDate, deliveryDate, 
       confirmDate, uid, status
@@ -87,7 +87,7 @@
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.vi.tmall.pojo.Order" useGeneratedKeys="true">
-    insert into order
+    insert into order_
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderCode != null">
         orderCode,
@@ -166,7 +166,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.vi.tmall.pojo.Order">
-    update order
+    update order_
     <set>
       <if test="orderCode != null">
         orderCode = #{orderCode,jdbcType=VARCHAR},
@@ -208,7 +208,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.vi.tmall.pojo.Order">
-    update order
+    update order_
     set orderCode = #{orderCode,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       post = #{post,jdbcType=VARCHAR},
